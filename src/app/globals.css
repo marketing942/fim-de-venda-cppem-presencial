@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green: #1adb65;
+  --green-dark: #14b554;
+  --black: #0a0a0a;
+  --card: #111111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #f0f0f0;
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .text-green {
+    color: #1adb65;
+  }
+  .bg-green {
+    background-color: #1adb65;
+  }
+  .border-green {
+    border-color: #1adb65;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+::-webkit-scrollbar-thumb {
+  background: #1adb6560;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1adb65;
+}
+
+/* Progress bar animation */
+@keyframes progress-fill {
+  from { width: 0%; }
+}
+
+.progress-bar-fill {
+  animation: progress-fill 0.6s ease-out;
+}
+
+/* Card completed animation */
+@keyframes check-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.check-pop {
+  animation: check-pop 0.35s ease-out forwards;
+}
