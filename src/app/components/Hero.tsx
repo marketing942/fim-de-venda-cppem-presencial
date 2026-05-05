@@ -13,30 +13,24 @@ export default function Hero() {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-center text-white leading-tight mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-center text-white leading-tight mb-6">
           Parabéns pela sua{" "}
           <span className="text-[#1adb65]">matrícula!</span>
           <br />
           Agora você faz parte do CPPEM.
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-center text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-          Aqui você caminhará com as pessoas certas e estará mais perto de
-          conquistar o seu sonho. Siga os próximos passos para concluir sua
-          entrada na turma presencial.
-        </p>
-
-        {/* Impact phrase */}
+        {/* Subtitle styled as impact card */}
         <div className="relative border border-[#1adb6540] bg-[#111111] rounded-xl p-5 max-w-2xl mx-auto">
           <div className="absolute -top-3 left-5">
             <Target size={16} className="text-[#1adb65]" />
           </div>
           <p className="text-white font-bold text-center text-base sm:text-lg leading-snug">
-            "Você tomou uma decisão importante.{" "}
+            Aqui você caminhará com as pessoas certas e estará mais perto de
+            conquistar o seu sonho.{" "}
             <span className="text-[#1adb65]">
-              Agora é hora de seguir o plano e entrar no ritmo da aprovação.
-            </span>"
+              Siga os próximos passos para concluir sua entrada na turma presencial.
+            </span>
           </p>
         </div>
       </div>

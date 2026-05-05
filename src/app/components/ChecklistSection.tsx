@@ -18,9 +18,9 @@ const STEPS = [
   },
   {
     number: 2,
-    title: "Compareça à recepção do CPPEM",
+    title: "Compareça à recepção para Assinar o Contrato e Cadastrar sua Digital",
     description:
-      "Vá até a recepção para assinar o contrato presencialmente e realizar seu registro na catraca de acesso.",
+      "Vá até a recepção para assinar o contrato presencialmente e realizar o cadastro da sua digital na catraca de acesso.",
     buttonLabel: "Já fui à recepção",
     href: undefined,
     note: "Leve um documento oficial com foto.",
@@ -40,14 +40,6 @@ const STEPS = [
       "A comunidade Quartel General é o ambiente do CPPEM para fortalecer sua preparação, receber direcionamentos e caminhar junto com outros alunos focados na aprovação.",
     buttonLabel: "Entrar no Quartel General",
     href: "https://cppem.com.br/comunidade-qg-cppem",
-  },
-  {
-    number: 5,
-    title: "Confirme se deu tudo certo",
-    description:
-      "Depois de concluir os passos anteriores, avise nossa equipe para confirmarmos se sua entrada está tudo certo.",
-    buttonLabel: "Falar com suporte",
-    href: "https://links.cppem.com.br/cppem-suporte-aluno",
   },
 ];
 
@@ -156,20 +148,6 @@ export default function ChecklistSection() {
           ))}
         </div>
 
-        {/* Support note */}
-        <div className="mt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            Me avisa se deu tudo certo. Nossa equipe está pronta para te orientar no que for necessário.
-          </p>
-          <a
-            href="https://links.cppem.com.br/cppem-suporte-aluno"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 mt-2 text-sm font-semibold text-[#1adb65] hover:underline underline-offset-2"
-          >
-            Falar com o suporte
-          </a>
-        </div>
       </div>
     </section>
   );

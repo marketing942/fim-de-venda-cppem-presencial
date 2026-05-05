@@ -1,33 +1,33 @@
-import { Building2, Users, ChevronRight } from "lucide-react";
+import { Building2, DoorOpen } from "lucide-react";
 
 const FLOORS = [
   {
-    floor: "1º Andar",
-    room: null,
-    label: "Recepção",
-    description: "Assinar contrato e registro na catraca",
-    isReception: true,
-  },
-  {
-    floor: "2º Andar",
-    room: "Sala 01",
-    label: "Turma Carreiras Policiais",
-    description: null,
+    floor: "4º Andar",
+    room: "Sala 03",
+    label: "Turma PMAL 2026",
     isReception: false,
+    isTop: true,
   },
   {
     floor: "3º Andar",
     room: "Sala 02",
     label: "Turma PMPE 2026",
-    description: null,
     isReception: false,
+    isTop: false,
   },
   {
-    floor: "4º Andar",
-    room: "Sala 03",
-    label: "Turma PMAL 2026",
-    description: null,
+    floor: "2º Andar",
+    room: "Sala 01",
+    label: "Turma Carreiras Policiais",
     isReception: false,
+    isTop: false,
+  },
+  {
+    floor: "1º Andar",
+    room: null,
+    label: "Recepção",
+    isReception: true,
+    isTop: false,
   },
 ];
 
@@ -38,88 +38,109 @@ export default function FloorsSection() {
         <h2 className="text-xl sm:text-2xl font-black text-white mb-1">
           Como encontrar sua sala
         </h2>
-        <p className="text-gray-500 text-sm mb-5">
+        <p className="text-gray-500 text-sm mb-6">
           Distribuição dos andares e turmas do CPPEM Presencial.
         </p>
 
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-[22px] top-6 bottom-6 w-px bg-[#1adb6530] hidden sm:block" />
+        {/* Building */}
+        <div className="max-w-lg mx-auto">
+          {/* Roof */}
+          <div className="flex justify-center">
+            <div className="relative w-[92%]">
+              {/* Roof triangle via borders */}
+              <div
+                className="w-full h-0 border-l-[30px] border-r-[30px] border-b-[28px] border-l-transparent border-r-transparent border-b-[#1adb6540]"
+                style={{ filter: "drop-shadow(0 -1px 0 #1adb6530)" }}
+              />
+              {/* Roof top line */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1">
+                <Building2 size={16} className="text-[#1adb65]" />
+              </div>
+            </div>
+          </div>
 
-          <div className="space-y-3">
+          {/* Building body */}
+          <div className="border-x border-b border-[#1adb6540] rounded-b-xl overflow-hidden bg-[#0e0e0e]">
             {FLOORS.map((item, index) => (
-              <div key={index} className="flex items-stretch gap-4">
-                {/* Floor indicator */}
-                <div className="flex flex-col items-center gap-1 flex-shrink-0 hidden sm:flex">
-                  <div
-                    className={`w-11 h-11 rounded-xl flex items-center justify-center border font-black text-xs z-10 ${
-                      item.isReception
-                        ? "bg-[#1adb6520] border-[#1adb6560] text-[#1adb65]"
-                        : "bg-[#181818] border-[#1adb6530] text-gray-400"
-                    }`}
-                  >
-                    {index + 1}
-                  </div>
-                </div>
-
-                {/* Card */}
+              <div
+                key={index}
+                className={`flex items-stretch border-b last:border-b-0 transition-colors ${
+                  item.isReception
+                    ? "border-[#1adb6540] bg-[#0d1f12]"
+                    : "border-[#1adb6520] bg-[#111111]"
+                }`}
+              >
+                {/* Left label — floor number */}
                 <div
-                  className={`flex-1 rounded-xl border p-4 sm:p-5 flex items-center gap-3 ${
+                  className={`flex-shrink-0 w-[72px] sm:w-[88px] flex flex-col items-center justify-center py-4 border-r ${
                     item.isReception
-                      ? "bg-[#0d1f12] border-[#1adb6550]"
-                      : "bg-[#111111] border-[#1adb6530]"
+                      ? "border-[#1adb6540] bg-[#1adb6510]"
+                      : "border-[#1adb6520] bg-[#0a0a0a]"
                   }`}
                 >
-                  {/* Mobile floor number */}
-                  <div
-                    className={`sm:hidden w-9 h-9 rounded-lg flex items-center justify-center border font-black text-xs flex-shrink-0 ${
-                      item.isReception
-                        ? "bg-[#1adb6520] border-[#1adb6560] text-[#1adb65]"
-                        : "bg-[#181818] border-[#1adb6530] text-gray-400"
+                  <span
+                    className={`text-[10px] font-black tracking-widest uppercase leading-none ${
+                      item.isReception ? "text-[#1adb65]" : "text-gray-500"
                     }`}
                   >
-                    {index + 1}
-                  </div>
+                    {item.floor.split(" ")[0]}
+                  </span>
+                  <span
+                    className={`text-[10px] font-bold tracking-wider uppercase leading-none mt-0.5 ${
+                      item.isReception ? "text-[#1adb65]" : "text-gray-600"
+                    }`}
+                  >
+                    {item.floor.split(" ").slice(1).join(" ")}
+                  </span>
+                </div>
 
-                  <div className="flex-shrink-0">
+                {/* Right content */}
+                <div className="flex-1 flex items-center gap-3 px-4 py-4">
+                  {/* Window / door icon */}
+                  <div
+                    className={`flex-shrink-0 w-8 h-8 rounded flex items-center justify-center border ${
+                      item.isReception
+                        ? "bg-[#1adb6520] border-[#1adb6550]"
+                        : "bg-[#181818] border-[#333]"
+                    }`}
+                  >
                     {item.isReception ? (
-                      <Building2 size={18} className="text-[#1adb65]" />
+                      <DoorOpen size={14} className="text-[#1adb65]" />
                     ) : (
-                      <Users size={18} className="text-gray-500" />
+                      <div className="w-4 h-4 border border-gray-600 rounded-sm grid grid-cols-2 gap-px p-0.5">
+                        <div className="bg-[#333] rounded-[1px]" />
+                        <div className="bg-[#333] rounded-[1px]" />
+                        <div className="bg-[#333] rounded-[1px]" />
+                        <div className="bg-[#333] rounded-[1px]" />
+                      </div>
                     )}
                   </div>
 
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span
-                        className={`text-xs font-bold tracking-wider uppercase ${
-                          item.isReception ? "text-[#1adb65]" : "text-gray-500"
-                        }`}
-                      >
-                        {item.floor}
+                  <div>
+                    {item.room && (
+                      <span className="text-[10px] font-bold text-gray-600 uppercase tracking-wider block mb-0.5">
+                        {item.room}
                       </span>
-                      {item.room && (
-                        <>
-                          <ChevronRight size={12} className="text-gray-600" />
-                          <span className="text-xs text-gray-500">{item.room}</span>
-                        </>
-                      )}
-                    </div>
+                    )}
                     <p
-                      className={`text-sm font-bold mt-0.5 ${
+                      className={`text-sm font-bold leading-tight ${
                         item.isReception ? "text-white" : "text-gray-200"
                       }`}
                     >
                       {item.label}
                     </p>
-                    {item.description && (
-                      <p className="text-xs text-gray-500 mt-0.5">{item.description}</p>
-                    )}
                   </div>
                 </div>
               </div>
             ))}
+
+            {/* Ground / base */}
+            <div className="h-3 bg-[#1adb6515] border-t border-[#1adb6530]" />
           </div>
+
+          {/* Foundation */}
+          <div className="mx-4 h-2 bg-[#1adb6520] rounded-b-sm" />
+          <div className="mx-8 h-1.5 bg-[#1adb6515] rounded-b-sm" />
         </div>
       </div>
     </section>
