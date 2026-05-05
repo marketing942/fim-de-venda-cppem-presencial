@@ -40,29 +40,15 @@ export default function FloorsSection() {
 
         <div className="flex gap-4 sm:gap-6 items-stretch">
           {/* Table */}
-          <div className="flex-1 bg-[#111111] border border-[#1adb6530] rounded-xl overflow-hidden">
+          <div className="flex-1 bg-[#0d1f12] border border-[#1adb6540] rounded-xl overflow-hidden">
             {FLOORS.map((item, index) => (
               <div
                 key={index}
-                className={`flex items-center border-b last:border-b-0 ${
-                  item.isReception
-                    ? "bg-[#0d1f12] border-[#1adb6540]"
-                    : "bg-transparent border-[#1adb6520]"
-                }`}
+                className="flex items-center border-b last:border-b-0 border-[#1adb6540]"
               >
                 {/* Floor column */}
-                <div
-                  className={`flex-shrink-0 w-[90px] sm:w-[108px] px-3 py-4 border-r ${
-                    item.isReception
-                      ? "border-[#1adb6540]"
-                      : "border-[#1adb6520]"
-                  }`}
-                >
-                  <span
-                    className={`text-xs font-black tracking-wider uppercase ${
-                      item.isReception ? "text-[#1adb65]" : "text-gray-400"
-                    }`}
-                  >
+                <div className="flex-shrink-0 w-[90px] sm:w-[108px] px-3 py-4 border-r border-[#1adb6540]">
+                  <span className="text-xs font-black tracking-wider uppercase text-[#1adb65]">
                     {item.floor}
                   </span>
                 </div>
@@ -70,15 +56,11 @@ export default function FloorsSection() {
                 {/* Content column */}
                 <div className="flex-1 px-4 py-4">
                   {item.room && (
-                    <span className="text-[10px] font-bold text-gray-600 uppercase tracking-wider block mb-0.5">
+                    <span className="text-[10px] font-bold text-[#1adb6580] uppercase tracking-wider block mb-0.5">
                       {item.room}
                     </span>
                   )}
-                  <p
-                    className={`text-sm font-bold leading-tight ${
-                      item.isReception ? "text-white" : "text-gray-200"
-                    }`}
-                  >
+                  <p className="text-sm font-bold leading-tight text-white">
                     {item.label}
                   </p>
                 </div>
