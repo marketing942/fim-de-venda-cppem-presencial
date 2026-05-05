@@ -65,7 +65,7 @@ export default function ProgressBar({ completed, total, onReset }: ProgressBarPr
               onClick={onReset}
               className="text-xs text-gray-500 hover:text-gray-300 transition-colors underline underline-offset-2"
             >
-              Refazer checklist
+              Reiniciar Tarefas
             </button>
           </div>
         </div>

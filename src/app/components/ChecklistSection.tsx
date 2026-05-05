@@ -23,7 +23,6 @@ const STEPS = [
       "Vá até a recepção para assinar o contrato presencialmente e realizar o cadastro da sua digital na catraca de acesso.",
     buttonLabel: "Já fui à recepção",
     href: undefined,
-    note: "Leve um documento oficial com foto.",
   },
   {
     number: 3,
@@ -141,7 +140,7 @@ export default function ChecklistSection() {
               buttonLabel={step.buttonLabel}
               href={step.href}
               badge={step.badge}
-              note={step.note}
+
               completed={completed[i]}
               onComplete={() => markComplete(i)}
             />

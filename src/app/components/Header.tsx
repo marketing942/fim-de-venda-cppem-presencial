@@ -16,9 +16,12 @@ export default function Header() {
             />
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col items-end gap-0.5">
           <span className="text-xs font-semibold tracking-widest text-[#1adb65] uppercase border border-[#1adb6560] rounded px-2 py-1">
             Turmas Presenciais
+          </span>
+          <span className="text-[10px] font-medium text-gray-500 tracking-wide italic pr-0.5">
+            Seu sonho, nosso objetivo.
           </span>
         </div>
       </div>
