@@ -30,7 +30,7 @@ const STEPS = [
     description:
       "Acesse a comunidade VIP com monitores e xerifes. Esse será um dos canais importantes de acompanhamento, avisos e organização da rotina da turma.",
     buttonLabel: "Entrar na comunidade VIP",
-    href: "https://chat.whatsapp.com/ImUnn0kxlFEE7sGhxV1jOq",
+    href: "https://links.cppem.com.br/comunidade-turma-presencial",
   },
   {
     number: 4,
@@ -38,7 +38,7 @@ const STEPS = [
     description:
       "A comunidade Quartel General é o ambiente do CPPEM para fortalecer sua preparação, receber direcionamentos e caminhar junto com outros alunos focados na aprovação.",
     buttonLabel: "Entrar no Quartel General",
-    href: "https://cppem.com.br/comunidade-qg-cppem",
+    href: "https://cppem.com.br/qg",
   },
 ];
 
