@@ -33,7 +33,7 @@ export const SUPPORT_CHANNELS: SupportChannel[] = [
     description: "Fale com a equipe CPPEM. Envie nome completo, turma ou produto e a sua dúvida.",
     hoursLabel: "Seg. a sex., das 12h às 22h",
     cta: "Falar com a equipe",
-    href: "https://links.cppem.com.br/cppem-suporte-aluno",
+    href: "https://links.cppem.com.br/suporte-cppem-equipe",
     // Sem atendimento humano aos sábados, domingos e feriados (ver lib/hours.ts).
     hours: { open: 12, close: 22, weekdays: [1, 2, 3, 4, 5], closedOnHolidays: true },
   },
