@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Trophy } from "lucide-react";
 import StepCard from "./StepCard";
-import ProgressBar from "./ProgressBar";
 
 const STORAGE_KEY = "cppem_checklist_progress";
 
@@ -11,16 +11,27 @@ const STEPS = [
     number: 1,
     title: "Preencha o formulário inicial",
     description:
-      "Complete o formulário abaixo para que nossa equipe tenha seus dados organizados e consiga finalizar corretamente sua entrada na turma presencial.",
+      "Complete o formulário para que nossa equipe tenha seus dados organizados e consiga finalizar corretamente sua entrada na turma presencial.",
+    howTo: [
+      "Clique no botão abaixo: o formulário abre em uma nova aba.",
+      "Preencha todos os campos com atenção.",
+      "Envie o formulário e volte para esta página.",
+    ],
     buttonLabel: "Preencher formulário",
     href: "https://cppem.notion.site/2e8bbae8074c8189a156db76b072abd5?pvs=105",
     badge: "Obrigatório",
   },
   {
     number: 2,
-    title: "Compareça à recepção para Assinar o Contrato e Cadastrar sua Digital",
+    title: "Compareça à recepção para assinar o contrato e cadastrar sua digital",
     description:
       "Vá até a recepção para assinar o contrato presencialmente e realizar o cadastro da sua digital na catraca de acesso.",
+    howTo: [
+      "Veja o endereço e abra o mapa na seção “Como chegar”, logo abaixo dos passos.",
+      "Vá até a recepção da unidade.",
+      "Assine o contrato e cadastre sua digital na catraca.",
+      "Depois, volte aqui e clique em “Já fui à recepção”.",
+    ],
     buttonLabel: "Já fui à recepção",
     href: undefined,
   },
@@ -29,34 +40,27 @@ const STEPS = [
     title: "Entre na comunidade VIP da sua turma",
     description:
       "Acesse a comunidade VIP com monitores e xerifes. Esse será um dos canais importantes de acompanhamento, avisos e organização da rotina da turma.",
+    howTo: [
+      "Clique no botão abaixo para abrir a comunidade.",
+      "Entre na comunidade da sua turma.",
+      "Fique de olho nos avisos: é por lá que a rotina da turma é organizada.",
+    ],
     buttonLabel: "Entrar na comunidade VIP",
     href: "https://links.cppem.com.br/comunidade-turma-presencial",
-  },
-  {
-    number: 4,
-    title: "Entre na comunidade Quartel General",
-    description:
-      "A comunidade Quartel General é o ambiente do CPPEM para fortalecer sua preparação, receber direcionamentos e caminhar junto com outros alunos focados na aprovação.",
-    buttonLabel: "Entrar no Quartel General",
-    href: "https://cppem.com.br/qg",
   },
 ];
 
 export default function ChecklistSection() {
-  const [completed, setCompleted] = useState<boolean[]>(
-    Array(STEPS.length).fill(false)
-  );
+  const [completed, setCompleted] = useState<boolean[]>(Array(STEPS.length).fill(false));
   const [mounted, setMounted] = useState(false);
 
-  // Load from localStorage only on client
+  // Lê o progresso do localStorage só no cliente
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length === STEPS.length) {
-          setCompleted(parsed);
-        }
+        if (Array.isArray(parsed) && parsed.length === STEPS.length) setCompleted(parsed);
       }
     } catch {
       // ignore
@@ -64,7 +68,7 @@ export default function ChecklistSection() {
     setMounted(true);
   }, []);
 
-  // Save to localStorage on every change
+  // Salva a cada alteração
   useEffect(() => {
     if (!mounted) return;
     try {
@@ -92,61 +96,70 @@ export default function ChecklistSection() {
   }
 
   const completedCount = completed.filter(Boolean).length;
+  const allDone = completedCount === STEPS.length;
+  const percentage = Math.round((completedCount / STEPS.length) * 100);
+  const currentIndex = completed.findIndex((done) => !done);
 
-  // Avoid hydration mismatch by not rendering progress state until mounted
+  // Evita divergência de hidratação: só mostra o progresso depois de montar
   if (!mounted) {
     return (
-      <section className="w-full px-4 pb-12">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-[#111111] border border-[#1adb6530] rounded-xl p-5 mb-6 animate-pulse h-20" />
-          <div className="space-y-4">
-            {STEPS.map((step) => (
-              <div
-                key={step.number}
-                className="bg-[#111111] border border-[#1adb6530] rounded-xl h-40 animate-pulse"
-              />
-            ))}
-          </div>
+      <section className="section" id="passos">
+        <div className="container narrow">
+          <div className="steps-skeleton" aria-hidden />
         </div>
       </section>
     );
   }
 
   return (
-    <section className="w-full px-4 pb-12">
-      <div className="max-w-4xl mx-auto">
-        <ProgressBar
-          completed={completedCount}
-          total={STEPS.length}
-          onReset={resetAll}
-        />
+    <section className="section" id="passos" aria-labelledby="passos-titulo">
+      <div className="container narrow">
+        <span className="eyebrow">Passo a passo</span>
+        <h2 id="passos-titulo" className="section-title">Próximos passos</h2>
+        <p className="section-copy">Conclua uma etapa de cada vez, na ordem. Seu progresso fica salvo neste aparelho.</p>
 
-        <div className="mb-6">
-          <h2 className="text-xl sm:text-2xl font-black text-white mb-1">
-            Próximos Passos
-          </h2>
-          <p className="text-gray-500 text-sm">
-            Conclua cada etapa para finalizar sua entrada na turma presencial.
-          </p>
+        <div className="progress" role="status" aria-live="polite">
+          {allDone ? (
+            <p className="progress-done">
+              <Trophy size={20} aria-hidden /> Tudo certo! Agora você está pronto para iniciar sua jornada presencial no CPPEM.
+            </p>
+          ) : (
+            <div className="progress-head">
+              <span>
+                Você concluiu <strong>{completedCount}</strong> de <strong>{STEPS.length}</strong> passos
+              </span>
+              <span className="progress-percent">{percentage}%</span>
+            </div>
+          )}
+          <div className="progress-track" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={percentage}>
+            <div className="progress-fill" style={{ width: `${percentage}%` }} />
+          </div>
         </div>
 
-        <div className="space-y-4">
+        <ol className="steps">
           {STEPS.map((step, i) => (
             <StepCard
               key={step.number}
               number={step.number}
               title={step.title}
               description={step.description}
+              howTo={step.howTo}
               buttonLabel={step.buttonLabel}
               href={step.href}
               badge={step.badge}
-
-              completed={completed[i]}
+              state={completed[i] ? "done" : i === currentIndex ? "current" : "upcoming"}
+              total={STEPS.length}
+              isLast={i === STEPS.length - 1}
               onComplete={() => markComplete(i)}
             />
           ))}
-        </div>
+        </ol>
 
+        <div className="reset-row">
+          <button type="button" className="reset-button" onClick={resetAll}>
+            Reiniciar tarefas
+          </button>
+        </div>
       </div>
     </section>
   );
