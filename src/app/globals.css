@@ -169,6 +169,32 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .footer-top { display: inline-flex; align-items: center; gap: .35rem; color: var(--gold-light); font: 700 .72rem var(--font-ui); letter-spacing: .1em; text-transform: uppercase; }
 .footer-top:hover { color: var(--gold-pale); }
 
+/* Primeiro acesso: pergunta do plano. Rodapé e atendimento ficam de fora. */
+html[data-gate="1"] .site-footer { display: none; }
+.gate { min-height: calc(100vh - 78px); display: flex; align-items: center; padding: 3rem 0; }
+.gate-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.2rem; }
+.gate-eyebrow::after { content: ""; width: 28px; height: 1px; background: var(--gold); }
+.gate-title { margin: 0; font: 700 clamp(2rem, 5.2vw, 3.4rem)/1.05 var(--font-display); letter-spacing: -.03em; text-transform: uppercase; }
+.gate-title span { color: var(--gold-light); }
+.gate-copy { margin: 0; color: var(--text-soft); font-size: 1.05rem; line-height: 1.7; }
+.gate-options { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+.plan-option { --accent: var(--gold-light); display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 2rem 1rem; cursor: pointer; color: var(--text); border: 1px solid var(--border); border-radius: .75rem; background: linear-gradient(145deg, rgba(24,24,30,.92), rgba(14,14,17,.92)); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.plan-option:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 18px 44px rgba(0,0,0,.45), 0 0 0 1px var(--accent); }
+.plan-option-icon { display: grid; width: 56px; height: 56px; place-items: center; border-radius: 50%; color: var(--accent); border: 1px solid var(--accent); background: rgba(255,255,255,.03); }
+.plan-option-name { font: 700 1.15rem/1.2 var(--font-display); letter-spacing: .02em; text-transform: uppercase; }
+.plan-black { --accent: #b9bdc6; }
+.plan-dourada { --accent: var(--gold-light); }
+.plan-prata { --accent: #dfe2e8; }
+.hero-plan { margin: .2rem 0 0; color: var(--text-muted); font-size: .88rem; }
+.hero-plan strong { color: var(--text-soft); font-weight: 600; }
+.hero-plan-change { padding: 0; border: 0; background: none; color: var(--gold-light); font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.hero-plan-change:hover { color: var(--gold-pale); }
+@media (max-width: 640px) {
+  .gate-options { grid-template-columns: 1fr; }
+  .plan-option { flex-direction: row; justify-content: flex-start; padding: 1.1rem 1.2rem; gap: 1rem; }
+  .plan-option-icon { width: 46px; height: 46px; }
+}
+
 @media (max-width: 760px) {
   .channel-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }

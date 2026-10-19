@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { Trophy } from "lucide-react";
 import StepCard from "./StepCard";
+import type { PLANS } from "@/lib/plans";
 
-const STORAGE_KEY = "cppem_checklist_progress";
+type Plan = (typeof PLANS)[number];
 
-const STEPS = [
+const BASE_STEPS = [
   {
     number: 1,
     title: "Preencha o formulário inicial",
@@ -50,7 +51,56 @@ const STEPS = [
   },
 ];
 
-export default function ChecklistSection() {
+// Só o plano Caveira Black recebe estes dois passos (mesmos textos dos guias dos planos de combate).
+const BLACK_EXTRA_STEPS = [
+  {
+    number: 4,
+    title: "Confira o e-mail da sua compra",
+    description:
+      "Sua liberação é automática: o acesso chega no mesmo e-mail que você cadastrou na hora da compra. Confira se ele já chegou.",
+    howTo: [
+      "Abra o e-mail que você usou na hora da compra.",
+      "Pesquise por “CPPEM” na caixa de entrada, no spam ou em promoções.",
+      "Encontrou o acesso? Volte aqui e clique em “Já conferi meu e-mail”.",
+      "Não chegou? Fale com a nossa equipe pelos canais de atendimento no fim desta página.",
+    ],
+    buttonLabel: "Já conferi meu e-mail",
+    href: undefined,
+    badge: undefined,
+  },
+  {
+    number: 5,
+    title: "Salve o link da plataforma",
+    description:
+      "Este é o link oficial de acesso à plataforma. Deixe salvo nos favoritos do seu navegador para acessar sempre que precisar.",
+    howTo: [
+      "Clique no botão abaixo para abrir a plataforma.",
+      "Salve a página nos favoritos do seu navegador.",
+      "Guarde esse link: você vai usá-lo para acessar seus conteúdos.",
+    ],
+    buttonLabel: "Acessar plataforma",
+    href: "https://plataforma.cppem.com.br",
+    badge: undefined,
+  },
+];
+
+function stepsFor(plan: Plan) {
+  return plan.extraSteps ? [...BASE_STEPS, ...BLACK_EXTRA_STEPS] : BASE_STEPS;
+}
+
+export function stepCountFor(plan: Plan) {
+  return stepsFor(plan).length;
+}
+
+// Dourada e Prata mantêm a chave antiga (o progresso de quem já usou continua valendo).
+function storageKeyFor(plan: Plan) {
+  return plan.extraSteps ? "cppem_checklist_progress_black" : "cppem_checklist_progress";
+}
+
+
+export default function ChecklistSection({ plan }: { plan: Plan }) {
+  const STEPS = stepsFor(plan);
+  const STORAGE_KEY = storageKeyFor(plan);
   const [completed, setCompleted] = useState<boolean[]>(Array(STEPS.length).fill(false));
   const [mounted, setMounted] = useState(false);
 

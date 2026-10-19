@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${oxanium.variable} ${rajdhani.variable}`}>
+    <html lang="pt-BR" data-gate="1" className={`${inter.variable} ${oxanium.variable} ${rajdhani.variable}`}>
       <body>
         <div className="page-shell" id="topo">
           <EmberField />
