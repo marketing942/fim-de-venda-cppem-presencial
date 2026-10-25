@@ -84,8 +84,26 @@ const BLACK_EXTRA_STEPS = [
   },
 ];
 
+// Último passo, para todos os planos: os extras da Central de Ajuda e o Wi-Fi dos alunos.
+const EXTRAS_STEP = {
+  number: 0,
+  title: "Confira os extras e conecte-se ao Wi-Fi dos alunos",
+  description:
+    "Na Central de Ajuda estão a rede Wi-Fi dos alunos, com QR Code, e os serviços e benefícios do CPPEM: alimentação na sede, academia, finanças e mais.",
+  howTo: [
+    "Clique no botão abaixo: a página de extras abre em uma nova aba.",
+    "Toque em “Wi-Fi” e aponte a câmera do celular para o QR Code (ou copie a senha).",
+    "Aproveite para conhecer os outros serviços e benefícios.",
+  ],
+  buttonLabel: "Ver extras e Wi-Fi",
+  href: "https://central-de-ajuda.cppem.com.br/extras",
+  badge: undefined,
+};
+
+// A numeração sai da posição: o Caveira Black tem mais passos que os outros planos.
 function stepsFor(plan: Plan) {
-  return plan.extraSteps ? [...BASE_STEPS, ...BLACK_EXTRA_STEPS] : BASE_STEPS;
+  const lista = plan.extraSteps ? [...BASE_STEPS, ...BLACK_EXTRA_STEPS, EXTRAS_STEP] : [...BASE_STEPS, EXTRAS_STEP];
+  return lista.map((step, i) => ({ ...step, number: i + 1 }));
 }
 
 export function stepCountFor(plan: Plan) {
@@ -110,7 +128,10 @@ export default function ChecklistSection({ plan }: { plan: Plan }) {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length === STEPS.length) setCompleted(parsed);
+        // progresso salvo antes de um passo novo entrar no fim da lista: mantém o que já foi feito
+        if (Array.isArray(parsed) && parsed.length <= STEPS.length) {
+          setCompleted([...parsed, ...Array(STEPS.length - parsed.length).fill(false)]);
+        }
       }
     } catch {
       // ignore
