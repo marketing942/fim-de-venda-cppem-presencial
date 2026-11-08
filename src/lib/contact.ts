@@ -1,11 +1,10 @@
 import { isWithinHours, nextOpeningLabel, type Schedule } from "@/lib/hours";
 
-// Mesmos dois canais da Central de Ajuda. Os links são redirecionadores do
+// Mesmo canal de suporte da Central de Ajuda. Os links são redirecionadores do
 // links.cppem.com.br: trocar o número do WhatsApp é feito lá, sem mexer aqui.
 
 export type SupportChannel = {
   id: string;
-  kind: "ai" | "team";
   title: string;
   description: string;
   hoursLabel: string;
@@ -17,18 +16,7 @@ export type SupportChannel = {
 
 export const SUPPORT_CHANNELS: SupportChannel[] = [
   {
-    id: "assistente",
-    kind: "ai",
-    title: "Assistente virtual",
-    description: "Fale com o assistente virtual sempre disponível. Feito para dúvidas mais simples e rápidas.",
-    hoursLabel: "24 horas, todos os dias",
-    cta: "Falar com a assistente",
-    href: "https://links.cppem.com.br/suporte-cppem-ass",
-    hours: null,
-  },
-  {
     id: "equipe",
-    kind: "team",
     title: "Suporte ao aluno",
     description: "Fale com a equipe CPPEM. Feito para dúvidas mais complexas e importantes.",
     hoursLabel: "Seg. a sex., das 12h às 22h",
